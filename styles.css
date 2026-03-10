@@ -1,12 +1,12 @@
 /* Simple responsive resume site styles */
 
 :root {
-  --bg: #0b1220;
-  --text: #e6e6e6;
-  --muted: #a0a8b8;
-  --accent: #2fb0ff;
-  --card: rgba(255, 255, 255, 0.06);
-  --border: rgba(255, 255, 255, 0.12);
+  --bg: #ebebeb;          /* page background */
+  --text: #000000;        /* main text */
+  --muted: #666666;       /* secondary text */
+  --accent: #333333;      /* link/buttons accent */
+  --card: rgba(0, 0, 0, 0.04);   /* very light card */
+  --border: rgba(0, 0, 0, 0.1);  /* light border */
   --radius: 14px;
   --max-width: 900px;
   --font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -43,8 +43,7 @@ body {
   margin: 0;
   font-family: var(--font);
   color: var(--text);
-  background: radial-gradient(circle at top, rgba(47, 176, 255, 0.22), transparent 55%),
-    linear-gradient(135deg, #071b2c, #060d13 60%);
+  background: var(--bg);
   line-height: 1.55;
   min-height: 100vh;
 }
@@ -60,7 +59,7 @@ a:focus-visible {
 }
 
 a:focus-visible {
-  outline: 2px solid rgba(47, 176, 255, 0.55);
+  outline: 2px solid rgba(255,255,255,0.55);
   outline-offset: 3px;
 }
 
@@ -71,13 +70,13 @@ a:focus-visible {
 }
 
 .site-header {
-  position: sticky;
-  top: 0;
+  /* header now static; stays in document flow */
+  position: static;
   z-index: 10;
   padding: 2.5rem 0 1.5rem;
   border-bottom: 1px solid var(--border);
-  background: rgba(11, 18, 32, 0.75);
-  backdrop-filter: blur(12px);
+  background: var(--bg);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
 }
 
 .name {
@@ -108,8 +107,8 @@ a:focus-visible {
 
 .nav a:hover,
 .nav a:focus-visible {
-  background: rgba(47, 176, 255, 0.14);
-  border-color: rgba(47, 176, 255, 0.32);
+  background: rgba(51, 51, 51, 0.1); /* accent‑toned hover */
+  border-color: rgba(51, 51, 51, 0.2);
 }
 
 .section {
@@ -136,7 +135,7 @@ a:focus-visible {
 .card:focus-within {
   transform: translateY(-2px);
   box-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
-  border-color: rgba(47, 176, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.22);
 }
 
 .meta {
@@ -157,8 +156,8 @@ a:focus-visible {
 .skills li {
   padding: 0.9rem 1rem;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--card);
+  border: 1px solid var(--border);
   text-align: center;
 }
 
@@ -208,9 +207,9 @@ a:focus-visible {
   gap: 0.45em;
   padding: 0.65rem 1.05rem;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  background: rgba(255, 255, 255, 0.06);
-  color: inherit;
+  border: 1px solid var(--border);
+  background: #f5f5f5;
+  color: var(--text);
   font-weight: 600;
   text-decoration: none;
   transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
@@ -218,41 +217,31 @@ a:focus-visible {
 
 .button:hover,
 .button:focus-visible {
-  transform: translateY(-1px);
-  background: rgba(47, 176, 255, 0.18);
-  border-color: rgba(47, 176, 255, 0.35);
+  transform: translateY(-1px) scale(1.03);
+  background: #e0e0e0;
+  border-color: rgba(0,0,0,0.15);
 }
 
 .button.primary {
   background: var(--accent);
-  color: #0b1220;
+  color: #ffffff;
   border-color: transparent;
 }
 
 .button.primary:hover,
 .button.primary:focus-visible {
-  background: rgba(47, 176, 255, 0.92);
-  box-shadow: 0 8px 20px rgba(47, 176, 255, 0.35);
+  background: #444444;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  animation: pulse 0.4s ease-in-out;
 }
 
-.info-card {
-  padding: 1.35rem 1.5rem;
-  border-radius: var(--radius);
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+/* subtle scale pulse for primary action */
+@keyframes pulse {
+  0%, 100% { transform: translateY(-1px) scale(1.03); }
+  50% { transform: translateY(-1px) scale(1.08); }
 }
 
-.info-card h3 {
-  margin-top: 0;
-}
-
-.info-card ul {
-  margin: 0.75rem 0 0;
-  padding: 0;
-  list-style: none;
-  display: grid;
-  gap: 0.5rem;
-}
+/* quick‑links/info-card styles removed – not used anymore */
 
 .card-grid {
   display: grid;
@@ -263,10 +252,6 @@ a:focus-visible {
 @media (max-width: 720px) {
   .hero {
     grid-template-columns: 1fr;
-  }
-
-  .hero-meta {
-    order: -1;
   }
 }
 
